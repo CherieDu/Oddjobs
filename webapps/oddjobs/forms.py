@@ -14,12 +14,6 @@ class ForgotPasswordForm(forms.Form):
         return email
 
 class ResetForgotPasswordForm(forms.Form):
-    # password1 = forms.CharField(max_length = 200, 
-    #                             label='Password', 
-    #                             widget=forms.PasswordInput(attrs={'class':'input-block-level form-control', 'placeholder':'Enter new password'}))
-    # password2 = forms.CharField(max_length = 200,
-    #                             label='Confirm Password',
-    #                             widget=forms.PasswordInput(attrs={'class':'input-block-level form-control', 'placeholder':'Confirm Password'})) 
     password1 = forms.CharField(max_length = 42, 
                                 label='Password', 
                                 widget=forms.PasswordInput(attrs={'class':'form-control', 'placeholder':'Enter new password'}))
@@ -108,3 +102,7 @@ class RegistrationForm(forms.Form):
         # It must return the cleaned data it got from the cleaned_data
         # dictionary
         return username
+
+
+
+

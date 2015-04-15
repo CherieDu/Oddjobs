@@ -10,5 +10,7 @@ urlpatterns = patterns('',
     url(r'^logout$', 'django.contrib.auth.views.logout_then_login',name='logout'),
     url(r'^register$', 'oddjobs.views.register',name='register'),
     url(r'^confirm-registration/(?P<username>[a-zA-Z0-9_@\+\-]+)/(?P<token>[a-z0-9\-]+)$', 'oddjobs.views.confirm_registration', name='confirm'),
+    url(r'^forgotPassword', 'oddjobs.views.forgotPassword',name='forgotPassword'),
+    url(r'^reset_forgot_password/(?P<email>[a-zA-Z0-9_@\+\-.]+)/(?P<token>[a-z0-9\-]+)$', 'oddjobs.views.reset_forgot_password',name='resetForgotPassword'),
 
 )
