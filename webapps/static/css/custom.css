@@ -1,0 +1,21 @@
+/*lewieiz's css file*/
+.non-login-function{
+	margin-top: 200px;
+}
+
+.bar{
+	background: red;
+}
+
+.letter-content{
+	/*background: red;*/
+	height: 400px;
+	/*visibility: hidden;*/
+}
+
+.sign{
+	margin: auto;
+	margin: 40px;
+	width: 70%;
+	vertical-align: center;
+}
