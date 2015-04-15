@@ -1,0 +1,253 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Welcome to Letters</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/static/js/bootstrap.min.js"></script>
+
+    <script>
+        window.onload = initPage;
+        function initPage(){
+            document.getElementById("sign_up_btn").onclick = function(){
+                request = new XMLHttpRequest();
+                request.open("POST", '/letters/register', true);
+            }
+        }
+    </script>
+
+    <!-- Custom CSS -->
+    <link href="/static/css/template.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/static/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+    <script src="/static/js/modernizr.custom.63321.js"></script>
+</head>
+
+<body>
+
+<div class="intro">
+
+    <!-- letter content -->
+    <div class="intro-body">
+
+        <div class="intro-body-body1">
+
+        </div>
+
+        <!-- letter content -->
+        <div class="intro-body-body2">
+            <div class="content-box">
+            {% if Registerform.errors %}
+                <div class="alert alert-danger" role="alert" >
+                {% for error in Registerform.non_field_errors %}
+                    <strong>{{ error }}</strong> <br>
+
+                {% endfor %}
+                    {% for field in Registerform.visible_fields %}
+                        {% for error in field.errors %}
+                        <strong>{{ error }}</strong> <br>
+                        {% endfor %}        
+                    {% endfor %}
+                </div>
+            {% endif %}
+                {% if form.errors %}
+                <div class="alert alert-danger" role="alert" >
+                    <strong>Sorry!</strong> Incorrect user name and password.
+                </div>
+
+                {% endif %}
+              <!-- ---- get letter box ---- -->
+                <div id="get-box" class="not-show">
+
+
+                    <div id="user-info-box">
+
+                        <div id="user-img">
+                            <img src="/static/img/default_user.png" style="height:40px; width:40px; "><br>
+                            <p>username</p>
+                        </div>
+
+                        <div id="letter-setting">
+
+                        </div>
+                    </div>
+
+                    <div id="letter-info-box">
+
+                        <textarea id="get_a_letter" class="form-control" rows="18" cols="50" readonly>
+                            Sorry, there is no letters in post office ...
+                        </textarea>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+        </div>
+        
+        <div class="intro-body-body3">
+
+        </div>
+
+    </div>
+
+
+    <!-- function -->
+    <div class="intro-footer">
+            <div class = "intro-footer-signin">
+
+                <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#signin-pop">
+                Sign In
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="signin-pop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-body">
+                    <section class="main" >
+                    
+                        <form class="form-2 " style="height:375px;" action="{% url 'django.contrib.auth.views.login' %}" method="post">
+
+                            <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            <h4 class="modal-title" id="myModalLabel">sign in</h4>
+                            </div>
+                            
+                            <div>
+                                
+                                    {{ form.username }}<br>
+                                    {{ form.password }}<br>
+                                
+                               <input class="btn btn-warning" type="submit" value="Login" >
+                                <input type="hidden" name="next" value="{{ next }}" />
+                                        {% csrf_token %}  
+                                
+                        <br><br>
+                            {% if form.errors %}
+                                <div class="alert alert-danger" role="alert" >
+                                    <strong>Sorry!</strong> Incorrect user name and password.
+                                </div>
+
+                            {% endif %}                        
+                        <a class="btn btn-default" role="button" href="www.google.com">Forgot Password?</a>
+
+                            </div>
+                        </form>​​
+
+                    </section>
+                </div>                
+
+                </div>
+
+            <!-- <a href="#" class="btn btn-default btn-lg">Sign In</a> -->
+        </div>
+
+        <div class = "intro-footer-get">
+
+        </div>
+
+
+        <!-- sign up -->
+        <div class = "intro-footer-signup">
+            
+             <button id="sign_up_btn" type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#signup-pop">
+                Sign Up
+            </button>
+                <div class="modal fade" id="signup-pop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-body">
+                    <section class="main" >
+                    
+                        <form class="form-2 " style="height:400px;" role="form" method="post" action="{%url 'register'%}">
+
+                            <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            <h4 class="modal-title" id="myModalLabel">sign in</h4>
+                            </div>
+                            
+                            <div class="modal-body" >
+                                {{ Registerform.email }}<br>
+                                {{ Registerform.username }}<br>
+                                {{ Registerform.password1 }}<br>
+                                {{ Registerform.password2 }}<br>
+
+                                {% for field in Registerform.hidden_fields %}
+                                  {{field}} 
+                                {% endfor %}
+<!--                             {% if Registerform.errors %}
+                                {{Registerform.errors}}
+                                {% for error in Registerform.errors %}
+                                <div class="alert alert-danger" role="alert" >
+                                    <strong>{{error}}</strong> 
+                                </div>
+                                {% endfor %}
+                            {% endif %}   -->
+<!--                             <div class="alert alert-danger" role="alert" >
+                                {% for field in Registerform.visible_fields %}
+                                    <strong>{{field.errors}}</strong> 
+                                {% endfor %}
+                            </div> -->
+
+                                <div>   
+                                    <label ></label>
+                                    <input  type="submit" name="submit" value="Register">                        
+                                </div>
+                                <!-- <br> -->
+                            </div>
+                            {% csrf_token %}
+                        </form>​​
+                    </section>
+                </div>                
+
+                </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+
+
+    <!-- jQuery -->
+    <script src="/static/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/static/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="/static/js/jquery.easing.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
+    <!-- Google Maps API Key - Use your own API key to enable the map feature. More information on the Google Maps API can be found at https://developers.google.com/maps/ -->
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+
+    <!-- non login home js -->
+    <script src="/static/js/non_login_home.js"></script>
+    <script src="/static/js/utils.js" type="text/javascript"></script>
+    <script src="/static/js/get_letter.js" type="text/javascript"></script>
+    
+
+</body>
+
+</html>
