@@ -28,12 +28,44 @@ import time
 from django.http import JsonResponse
 from django.db.models import Q
 
+def make_userinfo_view(request, 
+                currentUser=[],
+                userinfo=[],
+                html=[],
+                userToShow=[],
+                grumblrs=[],
+                create_grumblr_form=GrumblrForm(),
+                create_userinfo_form=UserInfoForm(), 
+                create_register_form=RegistrationForm(),
+                create_changePassword_form=ResetPasswordForm(),
+                follow_relation=[],
+                block_relation=[]):
+
+    context = {
+                'block_relation':block_relation,
+                'follow_relation':follow_relation,
+                'username':currentUser,
+                'userinfo':userinfo,
+                'grumblrs':grumblrs,
+                'userToShow':userToShow,
+                'create_grumblr_form':create_grumblr_form,
+                'create_userinfo_form':create_userinfo_form,
+                'create_register_form':create_register_form,
+                'create_changePassword_form':create_changePassword_form,
+              }
+    return render(request, html, context)
+
+
+
 @login_required
 def home(request):
     context = {}
     # original page
     context['home_user'] = User.objects.get(id = request.user.id)
     return render(request, 'login_home.html', context)
+
+
+
 
 @transaction.atomic
 def register(request):

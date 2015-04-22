@@ -149,12 +149,16 @@ a:focus {
     /*background-color: blue;*/
     display: table-row;
     height: 90%;
+    width: 100%;
+
     overflow-y: scroll;
 }
 
 .intro .intro-body .intro-body-body1{
     display: table-cell;
     position: relative;
+    width: 100%;
+
 }
 
 .intro .intro-body .intro-body-body1 #letter-view-box{
@@ -164,7 +168,7 @@ a:focus {
     margin-top: 70px;
     margin-left: 20px;
     height: 520px;
-    width: 90%;
+    width: 100%;
     overflow-y: scroll;
     border-radius: 20px;
 }
@@ -172,10 +176,14 @@ a:focus {
 .intro .intro-body .intro-body-body1 .letter-view-box .letter-infomation{
     padding-top: 10px;
     font-size: 10px;
+        width: 100%;
+
 }
 
 .intro .intro-body .intro-body-body1 .letter-view-box p{
     font-size: 14px;
+    width: 100%;
+
 }
 
 .intro .intro-body .intro-body-body1 #cmt-view-box{
@@ -214,7 +222,7 @@ a:focus {
     opacity: 0.6;
     margin: auto;
     margin-top: 70px;
-    width: 500px;
+    width: 800px;
     height: 520px;
     overflow-y: scroll;
 }
@@ -254,13 +262,13 @@ a:focus {
     word-wrap: break-word;
 }
 
-.intro .intro-body .intro-body-body3{
+.intro .intro-body /*.intro-body-body3*/{
     /*background-color: red;*/
     display: table-cell;
     position: relative;
 }
 
-.intro .intro-body .intro-body-body3 #comment-box-1,#comment-box-2{
+.intro .intro-body /*.intro-body-body3 #comment-box-1,#comment-box-2*/{
     background-color: white;
     opacity: 0.6;
     position: absolute;
@@ -270,7 +278,6 @@ a:focus {
     overflow-y: scroll;
     border-radius: 20px;
 }
-
 
 .intro .intro-body .brand-heading {
     font-size: 40px;
