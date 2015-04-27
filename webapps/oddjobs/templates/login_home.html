@@ -1,61 +1,30 @@
-{% extends 'base_2_template.html'%}
-{% block title %}
-My Home Page
+{% extends 'base_template.html' %}
+
+{%block titleblock%}
+<title>Home Page</title>
+{% endblock %}
+
+{% block headblock%}
 {% endblock%}
 
-<!-- {%block titleblock%}
-<title>Home Page</title>
-{% endblock %} -->
 
-    <!-- Bootstrap core CSS -->
-{% block navbar %}
-<a class="blog-nav-item active" href="{%url 'home'%}">Home</a>
-          <a class="blog-nav-item" href="{%url 'following'%}">Following</a>
-          <a class="blog-nav-item" href="#">Follower</a>
-          <a class="blog-nav-item" href="{%url 'allOthers'%}">Discover</a>
-          <a class="blog-nav-item" href="{%url 'showProfile' userinfo.user.id %}">Profile</a>
 
-{% endblock %} 
-  {% block beforestream %}
-        <div class="col-sm-8 col-sm-offset-1 ">
-          <h3>What's up?</h3>
-           
-          <div class=" container blog-message" style="width:650px" >
-          
-           <div class="col-md-3">
-           <img src="{% url 'getProfilePhoto' username.id %}" style="width:120px;height:120px" alt="{{username}}" class="img-thumbnail img-responsive">
-            
-          </div>
-          <div class="col-md-9 ">
-            <form enctype="multipart/form-data" action="{% url 'addJob' %}" method="post" id="postform">
-              <div class = "blog-message-box blog-post">
-                <button type="button" class="btn btn-lg btn-link">{{username}}</button>
-                <br>
-                <div>
-                  <div class="row">
-            
-                    {% for field in create_job_form.visible_fields %}
-                    {{field}}
-                    {% endfor %}
-               
-                  </div>
-                </div>
-              </div>
 
-            
-              <div class="row">
-                <div class="blog-post-meta " align="right">
-                  
-                    <button type="submit"  class="btn btn-success">Post</button>
-                </div>
-                
-              </div>
-              {% csrf_token %}
-            </form>
-          <!-- /.blog-post -->
-          </div>    
-          
-          </div>
-  {% endblock %}
+{% block view_block_middle %}
+<p>
+This is the main part of my project.
+</p>
+{% endblock %}
+
+
+{% block view_block_right %}
+
+
+
+
+
+{% endblock %}
+
+
 
 

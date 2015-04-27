@@ -32,12 +32,11 @@
 
 <div class="intro">
 
-<!--     <div class="intro-body">
- -->
-        <div>
-<!--         <div class="intro-body-body1">
+    <div class="intro-body">
 
-        </div> -->
+        <div class="intro-body-body1">
+
+        </div>
 
         <div class="intro-body-body2">
             <div class="content-box">
@@ -78,10 +77,10 @@
             </div>
         </div>
         
-<!--         <div class="intro-body-body3">
+        <div class="intro-body-body3">
 
         </div>
- -->
+
     </div>
 
 
@@ -131,9 +130,15 @@
 
                 </div>
 
+            <!-- <a href="#" class="btn btn-default btn-lg">Sign In</a> -->
+        </div>
+
+        <div class = "intro-footer-get">
+
         </div>
 
 
+        <!-- sign up -->
         <div class = "intro-footer-signup">
             
              <button id="sign_up_btn" type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#signup-pop">
@@ -159,7 +164,19 @@
                                 {% for field in Registerform.hidden_fields %}
                                   {{field}} 
                                 {% endfor %}
-
+<!--                             {% if Registerform.errors %}
+                                {{Registerform.errors}}
+                                {% for error in Registerform.errors %}
+                                <div class="alert alert-danger" role="alert" >
+                                    <strong>{{error}}</strong> 
+                                </div>
+                                {% endfor %}
+                            {% endif %}   -->
+<!--                             <div class="alert alert-danger" role="alert" >
+                                {% for field in Registerform.visible_fields %}
+                                    <strong>{{field.errors}}</strong> 
+                                {% endfor %}
+                            </div> -->
 
                                 <div>   
                                     <label ></label>
@@ -172,7 +189,7 @@
                     </section>
                 </div>                
 
-            </div>
+                </div>
 
         </div>
 

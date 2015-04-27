@@ -105,37 +105,4 @@ class RegistrationForm(forms.Form):
 
 
 
-class UserInfoForm(forms.ModelForm):
-
-    class Meta:
-        model = UserInfo
-        exclude = {'user', 'blocks', 'follows'}
-        fields = {'firstname', 'lastname', 'location', 'cellphone', 'picture'}
-        widgets = {
-                'picture' : forms.FileInput() }
-
-
-class CommentForm(forms.ModelForm):
-    comment = forms.CharField(widget=forms.Textarea(
-        attrs={'autocomplete':'off',
-                'name':'newcomment',
-                'class':'commentbox',
-                'display':'hidden',
-                'placeholder':"Comment..."}), 
-        label='')
-
-    class Meta:
-        model = Comment
-        fields={'comment'}
-
-class JobForm(forms.ModelForm):
-    #text = forms.CharField(widget=forms.Textarea(attrs={'autocomplete':'off','name':'newpost','class':'input_detail','display':'hidden','placeholder':"Say something..."}), label='')
-    class Meta:
-        model = Job
-        fields={'content','picture', 'locationState'}
-        widgets = {
-            'text': forms.Textarea(attrs={'class':"form-control" ,'rows':"3",'placeholder':"Post your job here..."}),
-            'picture' : forms.FileInput()         
-        }
-
 

@@ -56,16 +56,16 @@
                     </li>
 
                     <li>
-                        <a class="page-scroll" href="#"> Posting History</a>
+                        <a class="page-scroll" href="#"><i class="fa fa-user"></i> Posting History</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#"> Helping History</a>
+                        <a class="page-scroll" href="#"><i class="fa fa-heart"></i> Helping History</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#"> Discovery</a>
+                        <a class="page-scroll" href="#"><i class="fa fa-envelope-o"></i> Discovery</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#"> Account </a>
+                        <a class="page-scroll" href="#"><i class="fa fa-area-chart"></i> Account </a>
                     </li>
                 </ul>
             </div>
@@ -74,60 +74,38 @@
         <!-- /.container -->
     </nav>
 
-
-
-
 <div class="intro">
-<div>
-    <br>
-    <br>
-    <br>
-    <br>
-
-</div>
-<div><p>here</p></div>
 
 
-<div>
-    <div class = "container">
-     <!-- <div class="blog-header">
-        <h1 class="blog-title">Chunyue Du's Blog</h1>
-        <p class="lead blog-description">The official example template of creating a blog with Bootstrap.</p>
-      </div>
-    -->
-      <div class="row">
-        <div class="col-sm-3  blog-sidebar">
-  {% block sidebar %}
-          <div class="sidebar-module sidebar-module-inset">
-            
-            <h2>{{username}}</h2>
+    <!-- letter content -->
+    <div class="intro-body">
 
-            <ul class="nav nav-pills">
+        <div class="intro-body-body1">
+            {% block view_block_left %}{% endblock %}
+        </div>
 
-              <li><a href="#">Odd jobs <span class="badge">2</span></a></li>
-              <li><a href="#">Helping Others <span class="badge">34</span></a></li>
-
-            </ul>
         
-          </div>
+        <div class="intro-body-body2">
 
-{% endblock %}
+              
+                {% block view_block_middle %}{% endblock %}
+           
+            
+        </div>
+        
+
+        <!-- comment box, just for get -->
+        <div class="intro-body-body3">
+            {% block view_block_right %}{% endblock %}
+
+        </div>
+
+    </div>
 
 
-
-        </div><!-- /.blog-sidebar -->
-
-{% block mainsteam %}
-{% endblock%}
-
-      </div><!-- /.row -->
-
-    </div><!-- /.container -->
-
-</div>
-
-
-    <div class="intro-footer">    
+    <!-- function -->
+    <div class="intro-footer">
+    
         <!-- sign in button -->
         <div class = "intro-footer-signin">
             {% block footer_function_block_left %}{% endblock %}

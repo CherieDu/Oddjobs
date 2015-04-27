@@ -28,61 +28,12 @@ import time
 from django.http import JsonResponse
 from django.db.models import Q
 
-
-def make_userinfo_view(request, 
-                currentUser=[],
-                userinfo=[],
-                html="",
-                userToShow=[],
-                jobs=[],
-                create_job_form=JobForm(),
-                create_userinfo_form=UserInfoForm(), 
-                create_register_form=RegistrationForm(),
-                create_changePassword_form=ResetPasswordForm()):
-
-    context = {
-                'username':currentUser,
-                'userinfo':userinfo,
-                'jobs':jobs,
-                'userToShow':userToShow,
-                'create_job_form':create_job_form,
-                'create_userinfo_form':create_userinfo_form,
-                'create_register_form':create_register_form,
-                'create_changePassword_form':create_changePassword_form,
-              }
-    return render(request, html, context)
-
-
-
 @login_required
 def home(request):
-    # context = {}
-    # # original page
-    # context['home_user'] = User.objects.get(id = request.user.id)
-    # return render(request, 'login_home.html', context)
-
-
-    new_job = Job(user=request.user)
-    jobform=JobForm(instance=new_job)
-
-    html = 'login_home.html'
-    currentUser = request.user
-    userInfoToEdit = get_object_or_404(UserInfo, user=currentUser)
-    userToShow = request.user
-    userinfo_form = UserInfoForm(request.POST,request.FILES, instance=userInfoToEdit)
-    jobs = Job.objects.filter(user=request.user).order_by('-date_created')
-    return make_userinfo_view(request=request, 
-        html=html, 
-        jobs=jobs,
-        create_userinfo_form=userinfo_form,
-        userToShow=userToShow,
-        create_job_form=jobform,
-        userinfo=userInfoToEdit,
-        currentUser=currentUser)
-
-
-
-
+    context = {}
+    # original page
+    context['home_user'] = User.objects.get(id = request.user.id)
+    return render(request, 'login_home.html', context)
 
 @transaction.atomic
 def register(request):
@@ -200,59 +151,5 @@ def reset_forgot_password(request, email, token):
     user.save()
 
     return redirect('login')
-
-@login_required
-@transaction.atomic
-def getProfilePhoto(request, id):
-    user=User.objects.get(id=id)
-    userinfo = get_object_or_404(UserInfo, user=user)
-    if not userinfo.picture:
-        raise Http404
-
-    content_type = guess_type(userinfo.picture.name)
-    return
-
-
-@login_required
-@transaction.atomic
-def getJobPhoto(request, id):
-    user=request.user
-    job = get_object_or_404(Job, id=id)
-    if not job.picture:
-        raise Http404
-
-    content_type = guess_type(job.picture.name)
-    return HttpResponse(job.picture, content_type=content_type)
-
-
-@login_required
-@transaction.atomic
-def addJob(request):
-    new_job = Job(user=request.user, userinfo=UserInfo.objects.get(user=request.user))
-    html = 'login_home.html'
-    if request.method=='GET':
-        jobform=JobForm(instance=new_job)
-        return redirect(html)
-
-    jobform=JobForm(request.POST, request.FILES, instance=new_job)
-    
-    if not jobform.is_valid():
-        return redirect(html)
-
-    jobform.save()
-    currentUser = request.user
-    userInfoToEdit = get_object_or_404(UserInfo, user=currentUser)
-    userToShow = request.user
-    userinfo_form = UserInfoForm(request.POST,request.FILES, instance=userInfoToEdit)
-    jobs = Job.objects.filter(user=request.user).order_by('-date_created')
-    return make_userinfo_view(request=request, 
-        html=html, 
-        jobs=jobs,
-        create_userinfo_form=userinfo_form,
-        userToShow=userToShow,
-        create_job_form=jobform,
-        userinfo=userInfoToEdit,
-        currentUser=currentUser)
-
 
 
