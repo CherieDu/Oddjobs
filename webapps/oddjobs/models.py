@@ -36,7 +36,7 @@ class Job(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     locationState = models.CharField(max_length=200, blank=False, default = "USA")
     picture = models.ImageField(upload_to="post-photos", blank=True, null=True)
-
+    category = models.CharField(max_length=200, blank=True, null = True)
     commentsNum = models.IntegerField(default=0)
     comments = models.ManyToManyField(Comment,related_name='job_comments', null=True)
     hasNewComment = models.BooleanField(default=False)

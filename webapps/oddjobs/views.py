@@ -208,3 +208,38 @@ def getProfilePhoto(request, id):
     content_type = guess_type(userinfo.picture.name)
     return HttpResponse(userinfo.picture, content_type=content_type)
 
+@login_required
+@transaction.atomic
+def addJob(request):
+    new_job = Job(user=request.user)
+    html = 'login_home.html'
+    if request.method=='GET':
+        jobform=JobForm(instance=new_job)
+        return redirect(html)
+
+    jobform=JobForm(request.POST, request.FILES, instance=new_job)
+    
+    if not jobform.is_valid():
+        return redirect(html)
+
+    jobform.save()
+    currentUser = request.user
+    userInfoToEdit = get_object_or_404(UserInfo, user=currentUser)
+    userToShow = request.user
+    userinfo_form = UserInfoForm(request.POST,request.FILES, instance=userInfoToEdit)
+    jobs = Job.objects.filter(user=request.user).order_by('-date_created')
+    return make_userinfo_view(request=request, 
+        html=html, 
+        jobs=jobs,
+        create_userinfo_form=userinfo_form,
+        userToShow=userToShow,
+        create_job_form=jobform,
+        userinfo=userInfoToEdit,
+        currentUser=currentUser)
+
+
+
+
+
+
+
