@@ -127,15 +127,17 @@ class CommentForm(forms.ModelForm):
         fields={'comment'}
 
 class JobForm(forms.ModelForm):
+    
     class Meta:
         model = Job
         fields={'content','picture', 'locationState', 'category'}
         widgets = {
             'content': forms.Textarea(attrs={'class':"form-control", 
-                                            'rows':"3",
+                                            'rows':"5",
                                             'placeholder':"Post your job here..."}),
             'picture' : forms.FileInput(attrs = {'id':"input-file", 
-                                            'type':"file"})         
+                                            'type':"file"})
+
         }
 
 

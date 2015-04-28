@@ -238,6 +238,17 @@ def addJob(request):
         currentUser=currentUser)
 
 
+@login_required
+@transaction.atomic
+def askingHistory(request):
+    username = request.user
+
+    jobs = Job.objects.filter(user=username).order_by('-date_created')
+    userinfo = UserInfo.objects.get(user=username)
+    
+    context = {'username': username, 'jobs' : jobs, 'userinfo':userinfo}
+
+    return render(request, 'asking_history.html', context)
 
 
 

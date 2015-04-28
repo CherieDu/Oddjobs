@@ -9,7 +9,7 @@ Oddjobs Page
 
 {% block navBar %}
 <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
-<li ><a href="#">Asking History </a></li>
+<li ><a href="{%url 'askingHistory'%}">Asking History </a></li>
 <li><a href="#">Helping History</a></li>
 <li><a href="#">Discover</a></li>
 <li><a href="#">Account</a></li>
@@ -26,111 +26,113 @@ Oddjobs Page
 
 </div>
 <div class = "col-md-9">
-{% block beforeStream %}
-<h3>Need helps?</h3>
-<div class="row">
-    <div class="col-lg-2">
-        <img src="{% url 'getProfilePhoto' username.id %}" style="width:120px;height:120px" alt="{{username}}" class="img-rounded img-responsive">
-    </div>
-    <div class="col-lg-10">
-        <div class="well bs-component">
-            <form enctype="multipart/form-data" action="{% url 'addJob' %}" method="post" id="postform" class="form-horizontal">
-                <fieldset>
-                  <h4 role="link">{{username}}</h4>
-                  <div class = "row">
-                        <div class="col-lg-4">
-                        <h5>{{create_job_form.locationState.label}}</h5>
-                          <select class="form-control" id="select" value = "{{create_job_form.locationState}}">
-                            <option value="AL">Alabama</option>
-                            <option value="AK">Alaska</option>
-                            <option value="AZ">Arizona</option>
-                            <option value="AR">Arkansas</option>
-                            <option value="CA">California</option>
-                            <option value="CO">Colorado</option>
-                            <option value="CT">Connecticut</option>
-                            <option value="DE">Delaware</option>
-                            <option value="DC">District Of Columbia</option>
-                            <option value="FL">Florida</option>
-                            <option value="GA">Georgia</option>
-                            <option value="HI">Hawaii</option>
-                            <option value="ID">Idaho</option>
-                            <option value="IL">Illinois</option>
-                            <option value="IN">Indiana</option>
-                            <option value="IA">Iowa</option>
-                            <option value="KS">Kansas</option>
-                            <option value="KY">Kentucky</option>
-                            <option value="LA">Louisiana</option>
-                            <option value="ME">Maine</option>
-                            <option value="MD">Maryland</option>
-                            <option value="MA">Massachusetts</option>
-                            <option value="MI">Michigan</option>
-                            <option value="MN">Minnesota</option>
-                            <option value="MS">Mississippi</option>
-                            <option value="MO">Missouri</option>
-                            <option value="MT">Montana</option>
-                            <option value="NE">Nebraska</option>
-                            <option value="NV">Nevada</option>
-                            <option value="NH">New Hampshire</option>
-                            <option value="NJ">New Jersey</option>
-                            <option value="NM">New Mexico</option>
-                            <option value="NY">New York</option>
-                            <option value="NC">North Carolina</option>
-                            <option value="ND">North Dakota</option>
-                            <option value="OH">Ohio</option>
-                            <option value="OK">Oklahoma</option>
-                            <option value="OR">Oregon</option>
-                            <option value="PA">Pennsylvania</option>
-                            <option value="RI">Rhode Island</option>
-                            <option value="SC">South Carolina</option>
-                            <option value="SD">South Dakota</option>
-                            <option value="TN">Tennessee</option>
-                            <option value="TX">Texas</option>
-                            <option value="UT">Utah</option>
-                            <option value="VT">Vermont</option>
-                            <option value="VA">Virginia</option>
-                            <option value="WA">Washington</option>
-                            <option value="WV">West Virginia</option>
-                            <option value="WI">Wisconsin</option>
-                            <option value="WY">Wyoming</option>
-                          </select>
-                          <br>
-                        </div> 
-                         <div class="col-lg-4">
-                         <h5>{{create_job_form.category.label}}</h5>
-                          <select class="form-control" id="select" value = "{{create_job_form.category}}">
-                            <option value="Housing">Housing</option>
-                            <option value="Jobs">Jobs</option>
-                            <option value="ForSale">For sale</option>
-                            <option value="Service">Service</option>
-                            <option value="rideShare">Ride share</option>
-                          </select>
-                          <br>
-                        </div> 
-                  </div>
+    {% block beforeStream %}
+    <h3>Need helps?</h3>
+    <div class="row">
+        <div class="col-lg-2">
+            <img src="{% url 'getProfilePhoto' username.id %}" style="width:120px;height:120px" alt="{{username}}" class="img-rounded img-responsive">
+        </div>
+        <div class="col-lg-10">
+            <div class="well bs-component">
+                <form enctype="multipart/form-data" action="{% url 'addJob' %}" method="post" id="postform" class="form-horizontal">
+                    <fieldset>
+                      <h4 role="link">{{username}}</h4>
+                      <div class = "row">
+                            <div class="col-lg-4">
+                            <h5>{{create_job_form.locationState.label}}</h5>
+                              <select class="form-control" id="select" value = "{{create_job_form.locationState}}">
+                                <option value="AL">Alabama</option>
+                                <option value="AK">Alaska</option>
+                                <option value="AZ">Arizona</option>
+                                <option value="AR">Arkansas</option>
+                                <option value="CA">California</option>
+                                <option value="CO">Colorado</option>
+                                <option value="CT">Connecticut</option>
+                                <option value="DE">Delaware</option>
+                                <option value="DC">District Of Columbia</option>
+                                <option value="FL">Florida</option>
+                                <option value="GA">Georgia</option>
+                                <option value="HI">Hawaii</option>
+                                <option value="ID">Idaho</option>
+                                <option value="IL">Illinois</option>
+                                <option value="IN">Indiana</option>
+                                <option value="IA">Iowa</option>
+                                <option value="KS">Kansas</option>
+                                <option value="KY">Kentucky</option>
+                                <option value="LA">Louisiana</option>
+                                <option value="ME">Maine</option>
+                                <option value="MD">Maryland</option>
+                                <option value="MA">Massachusetts</option>
+                                <option value="MI">Michigan</option>
+                                <option value="MN">Minnesota</option>
+                                <option value="MS">Mississippi</option>
+                                <option value="MO">Missouri</option>
+                                <option value="MT">Montana</option>
+                                <option value="NE">Nebraska</option>
+                                <option value="NV">Nevada</option>
+                                <option value="NH">New Hampshire</option>
+                                <option value="NJ">New Jersey</option>
+                                <option value="NM">New Mexico</option>
+                                <option value="NY">New York</option>
+                                <option value="NC">North Carolina</option>
+                                <option value="ND">North Dakota</option>
+                                <option value="OH">Ohio</option>
+                                <option value="OK">Oklahoma</option>
+                                <option value="OR">Oregon</option>
+                                <option value="PA">Pennsylvania</option>
+                                <option value="RI">Rhode Island</option>
+                                <option value="SC">South Carolina</option>
+                                <option value="SD">South Dakota</option>
+                                <option value="TN">Tennessee</option>
+                                <option value="TX">Texas</option>
+                                <option value="UT">Utah</option>
+                                <option value="VT">Vermont</option>
+                                <option value="VA">Virginia</option>
+                                <option value="WA">Washington</option>
+                                <option value="WV">West Virginia</option>
+                                <option value="WI">Wisconsin</option>
+                                <option value="WY">Wyoming</option>
+                              </select>
+                              <br>
+                            </div> 
+                             <div class="col-lg-4">
+                             <h5>{{create_job_form.category.label}}</h5>
+                              <select class="form-control" id="select" value = "{{create_job_form.category}}">
+                                <option value="Housing">Housing</option>
+                                <option value="Jobs">Jobs</option>
+                                <option value="ForSale">For sale</option>
+                                <option value="Service">Service</option>
+                                <option value="rideShare">Ride share</option>
+                              </select>
+                              <br>
+                            </div> 
+                      </div>
 
-                  <div class="form-group">
-                    <div class="col-lg-12">
-                        {{create_job_form.content}}
-                        <div id = "input-file">{{create_job_form.picture}}</div>
-                    </div>
-                  </div>
+                      <div class="form-group">
+                        <div class="col-lg-12">
+                            {{create_job_form.content}}
+                            {{create_job_form.picture}}
+                        </div>
+                      </div>
 
-                  <div class="form-group">
-                    <div class="col-lg-12 col-lg-offset-10">
-                      <button type="submit" class="btn btn-primary">Post</button>
-                    </div>
-                  </div>
-                </fieldset>
-                {% csrf_token %}
+                      <div class="form-group">
+                        <div class="col-lg-12">
+                          <button type="submit" class="btn btn-primary">Post</button>
+                        </div>
+                      </div>
+                    </fieldset>
+                    {% csrf_token %}
 
-              </form>            
+                  </form>            
+            </div>
+
+
         </div>
 
-
     </div>
 
-</div>
+    {% endblock%}
 
-{% endblock%}
+
 </div>
 {% endblock %}

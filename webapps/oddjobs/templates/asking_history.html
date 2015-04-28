@@ -1,0 +1,39 @@
+{% extends 'base2_template.html' %}
+
+{%block titleblock%}
+Oddjobs Page
+{% endblock %}
+
+
+{% block navBar %}
+<li ><a href="#">Home <span class="sr-only">(current)</span></a></li>
+<li class="active"><a href="#">Asking History </a></li>
+<li><a href="#">Helping History</a></li>
+<li><a href="#">Discover</a></li>
+<li><a href="#">Account</a></li>
+{% endblock %}
+
+{% block stream%}
+<p>anything here</p>
+{% for job in jobs%}
+<div class = "row">
+    <div class = "col-md-2" align="right">
+        <img src="{% url 'getProfilePhoto' username.id %}" style="width:120px;height:120px" alt="{{username}}" class="img-rounded img-responsive">
+    </div>
+    <div class = "col-md-10">
+        <blockquote>
+            <p>
+                {{job.content}}
+            </p>
+            <small>Posted Time: {{job.date_created}}</small>
+        </blockquote>  
+    </div>
+    <br>
+    <br>
+</div>
+    <br>
+    <br>
+
+{% endfor %}
+
+{% endblock%}
