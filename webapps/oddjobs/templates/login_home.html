@@ -8,11 +8,11 @@ Oddjobs Page
 {% endblock%}
 
 {% block navBar %}
-<li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
+<li class="active"><a href="{%url 'home'%}">Home </a></li>
 <li ><a href="{%url 'askingHistory'%}">Asking History </a></li>
 <li><a href="#">Helping History</a></li>
 <li><a href="#">Discover</a></li>
-<li><a href="#">Account</a></li>
+<li><a href="{%url 'showProfile' userinfo.user.id %}">Account</a></li>
 {% endblock %}
 
 {% block mainPage%}

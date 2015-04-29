@@ -109,8 +109,7 @@ class UserInfoForm(forms.ModelForm):
         model = UserInfo
         exclude = {'user', 'blocks', 'follows'}
         fields = {'firstname', 'lastname', 'location', 'cellphone', 'picture'}
-        widgets = {
-                'picture' : forms.FileInput() }
+        widgets = {'picture' : forms.FileInput() }
 
 
 class CommentForm(forms.ModelForm):
@@ -127,7 +126,7 @@ class CommentForm(forms.ModelForm):
         fields={'comment'}
 
 class JobForm(forms.ModelForm):
-    
+
     class Meta:
         model = Job
         fields={'content','picture', 'locationState', 'category'}

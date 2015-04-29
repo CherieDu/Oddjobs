@@ -138,8 +138,8 @@ def confirm_registration(request, username, token):
     return render(request, 'confirmed.html', {})
 
 
-def home_login(request):
-    return render(request, 'login_home.html')
+# def home_login(request):
+#     return render(request, 'login_home.html')
 
 
 @transaction.atomic
@@ -251,6 +251,35 @@ def askingHistory(request):
     return render(request, 'asking_history.html', context)
 
 
+@login_required
+@transaction.atomic
+def showProfile(request, id):
+    currentUser = request.user
+    userToShow = User.objects.get(id=id)
+    userinfo = get_object_or_404(UserInfo,user=userToShow)
+    userInfoForm = UserInfoForm(request.POST, request.FILES, instance=userinfo)
 
+    html = 'showProfile.html'
+    return make_userinfo_view(request=request,
+            currentUser=currentUser,
+            userinfo=userinfo,
+            html=html,
+            create_userinfo_form=userInfoForm,
+            userToShow=userToShow)
+
+
+@login_required
+@transaction.atomic
+def editProfile(request):
+    currentUser = request.user
+    userinfo = get_object_or_404(UserInfo,user=currentUser)
+    html = 'editProfile.html'
+    userInfoForm = UserInfoForm(request.POST, request.FILES, instance=userinfo)
+
+    return make_userinfo_view(request=request,
+            currentUser=currentUser,
+            userinfo=userinfo,
+            create_userinfo_form=userInfoForm,
+            html=html)
 
 

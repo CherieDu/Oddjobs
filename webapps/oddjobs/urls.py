@@ -4,7 +4,7 @@ from forms import *
 
 urlpatterns = patterns('',
     url(r'^$', 'oddjobs.views.home', name='home'),
-    # url(r'^home', 'oddjobs.views.home', name='home'),
+    url(r'^home', 'oddjobs.views.home', name='home'),
     url(r'^login$', 'django.contrib.auth.views.login', {'template_name':'non_login_home.html','authentication_form': LoginForm,'extra_context':{'Registerform':RegistrationForm}}, name = 'login'),
     #url(r'^login$', 'django.contrib.auth.views.login', {'template_name':'non_login_home.html'},name='login'),
     url(r'^logout$', 'django.contrib.auth.views.logout_then_login',name='logout'),
@@ -15,6 +15,9 @@ urlpatterns = patterns('',
     url(r'^getProfilePhoto/(?P<id>\d+)$', 'oddjobs.views.getProfilePhoto', name='getProfilePhoto'),
     url(r'^addJob$', 'oddjobs.views.addJob',name='addJob'),
     url(r'^askingHistory$', 'oddjobs.views.askingHistory',name='askingHistory'),
+    url(r'^showProfile/(?P<id>\d+)$', 'oddjobs.views.showProfile',name='showProfile'),
+
+    url(r'^editProfile$', 'oddjobs.views.editProfile',name='editProfile'),
 
 
 )

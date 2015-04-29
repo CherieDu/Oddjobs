@@ -1,0 +1,68 @@
+{% extends 'base2_template.html' %}
+
+{%block titleblock%}
+Oddjobs Profile
+{% endblock %}
+
+
+{% block navBar %}
+<li ><a href="{%url 'home' %}">Home <span class="sr-only">(current)</span></a></li>
+<li ><a href="{%url 'askingHistory'%}">Asking History </a></li>
+<li><a href="#">Helping History</a></li>
+<li><a href="#">Discover</a></li>
+<li class="active"><a href="{%url 'showProfile' userinfo.user.id%}">Account</a></li>
+{% endblock %}
+
+{% block mainPage%}
+
+{% block profile%}
+
+<div class = "row">
+    <div class = "col-md-2">
+        
+    </div>
+    <div align="center" class = "col-md-8">
+    <h3>
+        Profile
+    </h3>
+    <br>
+    <h4>Photo</h4>
+    <img src="{% url 'getProfilePhoto'  userinfo.user.id %}" style="width:150px;height:150px" alt="{{create_userinfo_form.user}}" class="img-thumbnail img-responsive">
+
+    <br>
+        <table class="table table-striped table-hover " >
+
+          <tbody>
+            <tr>
+              <td>Username</td>
+              <td>{{userinfo.user}}</td>
+            </tr>
+            <tr>
+              <td>First name</td>
+              <td>{{userinfo.firstname}}</td>
+            </tr>
+            <tr>
+              <td>Last name</td>
+              <td>{{userinfo.lastname}}</td>
+            </tr>
+            <tr>
+              <td>Cellphone</td>
+              <td>{{userinfo.cellphone}}</td>
+            </tr> 
+               <tr>
+              <td>Location</td>
+              <td>{{userinfo.cellphone}}</td>
+            </tr>
+
+          </tbody>
+        </table>  
+        <a href="{%url 'editProfile'%}" class="btn btn-success" role="button">Edit</a>      
+    </div>
+    <div class = "col-md-2">
+        
+    </div>
+</div>
+    {% endblock %}
+ 
+{% endblock %}
+
