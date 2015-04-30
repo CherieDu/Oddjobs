@@ -1,15 +1,15 @@
 {% extends 'base2_template.html' %}
 
 {%block titleblock%}
-Oddjobs Asking History
+Oddjobs Discover
 {% endblock %}
 
 
 {% block navBar %}
 <li ><a href="{%url 'home'%}">Home <span class="sr-only">(current)</span></a></li>
-<li class="active"><a href="{%url 'askingHistory'%}">Asking History </a></li>
+<li ><a href="{%url 'askingHistory'%}">Asking History </a></li>
 <li><a href="#">Helping History</a></li>
-<li><a href="{% url 'allJobs' %}">Discover</a></li>
+<li class="active"><a href="{% url 'allJobs' %}">Discover</a></li>
 <li><a href="{%url 'showProfile' user.id %}">Account</a></li>
 {% endblock %}
 {% block mainPage%}

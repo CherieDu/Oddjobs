@@ -20,6 +20,8 @@ urlpatterns = patterns('',
     url(r'^showProfile/(?P<id>\d+)$', 'oddjobs.views.showProfile',name='showProfile'),
 
     url(r'^editProfile$', 'oddjobs.views.editProfile',name='editProfile'),
+    url(r'^allJobs$', 'oddjobs.views.allJobs',name='allJobs'),
 
+    url(r'^search$', 'oddjobs.views.search',name='search'),
 
 )

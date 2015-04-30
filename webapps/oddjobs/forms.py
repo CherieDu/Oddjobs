@@ -155,8 +155,10 @@ class JobForm(forms.ModelForm):
 
     class Meta:
         model = Job
-        fields=('content','picture', 'locationState', 'category')
+        fields=('title', 'content','picture', 'locationState', 'category')
         widgets = {
+            'title': forms.TextInput(attrs={'class':"form-control",
+                                            'placeholder':"Input a title..."}),
             'content': forms.Textarea(attrs={'class':"form-control", 
                                             'rows':"5",
                                             'placeholder':"Post your job here..."}),

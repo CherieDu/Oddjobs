@@ -322,3 +322,45 @@ def getJobPhoto(request, id):
     content_type = guess_type(job.picture.name)
     return HttpResponse(job.picture, content_type=content_type)
 
+
+@login_required
+@transaction.atomic
+def allJobs(request):
+    jobs = Job.objects.all().order_by('-date_created')
+    userinfo = UserInfo.objects.get(user=request.user)
+    username = request.user
+    user = User.objects.get(username=request.user)
+    html = "discover.html"
+    currentUser = request.user
+    return make_userinfo_view(request=request,
+            currentUser=currentUser,
+            userinfo=userinfo,
+            jobs = jobs,
+            html=html,
+            user = user)
+
+@login_required
+@transaction.atomic
+def search(request):
+    searchText = ''
+    html = 'search.html'
+    if not (not 'searchText' in request.GET or not request.GET['searchText']):
+        searchText = request.GET['searchText']
+
+    
+    jobs = Job.objects.filter(content__icontains=searchText).order_by('-date_created')
+    userInfos = []
+    userInfos = UserInfo.objects.filter(
+        Q(firstname__icontains=searchText) | Q(lastname__icontains=searchText))
+    userInfos = list(userInfos)
+    users = User.objects.filter(username__icontains = searchText)
+    for user in users:
+        userInfos.append(UserInfo.objects.get(user = user))
+
+    username = request.user
+    context = { 'username': username, 'jobs' : jobs, 
+                'userInfos': userInfos, 'searchText': searchText}
+
+    return render(request, html, context)
+
+

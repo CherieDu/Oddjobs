@@ -11,16 +11,16 @@ Oddjobs Page
 <li class="active"><a href="{%url 'home'%}">Home </a></li>
 <li ><a href="{%url 'askingHistory'%}">Asking History </a></li>
 <li><a href="#">Helping History</a></li>
-<li><a href="#">Discover</a></li>
-<li><a href="{%url 'showProfile' userinfo.user.id %}">Account</a></li>
+<li><a href="{% url 'allJobs' %}">Discover</a></li>
+<li><a href="{%url 'showProfile' user.id %}">Account</a></li>
 {% endblock %}
 
 {% block mainPage%}
 <div class = "col-md-3">
-<div class = "center-block">
+<div class = "center-block" align="center">
 
-    <img src="{% url 'getProfilePhoto' userinfo.user.id %}" style="width:120px;height:120px" class="img-rounded img-responsive">
-    <h3>{{ username }}</h3>
+    <img src="{% url 'getProfilePhoto' userinfo.user.id %}" style="width:120px;height:120px" class="img-rounded img-responsive" align="center">
+    <h3 align="center">{{ username }}</h3>
     <span class="text-muted">Something else</span>
 </div>
 
@@ -29,15 +29,22 @@ Oddjobs Page
     {% block beforeStream %}
     <h3>Need helps?</h3>
     <div class="row">
-        <div class="col-lg-2">
+<!--         <div class="col-lg-2">
             <img src="{% url 'getProfilePhoto' userinfo.user.id %}" style="width:120px;height:120px" class="img-rounded img-responsive">
+            <h4 role="link" align="center">{{username}}</h4>
         </div>
-        <div class="col-lg-10">
+ -->        <div class="col-lg-12">
             <div class="well bs-component">
                 <form enctype="multipart/form-data" action="{% url 'addJob' %}" method="post" id="postform" class="form-horizontal">
                     <fieldset>
-                      <h4 role="link">{{username}}</h4>
+                      
+                      <div>
+                        <label>{{create_job_form.title.label}}</label>
+
+                        {{create_job_form.title}}
+                      </div>
                       <div class = "row">
+
                             <div class="col-lg-4">
                             <h5>{{create_job_form.locationState.label}}</h5>
                               <select class="form-control" id="select" value = "{{create_job_form.locationState}}">

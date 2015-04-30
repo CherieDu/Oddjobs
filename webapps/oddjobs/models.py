@@ -31,7 +31,8 @@ class Comment(models.Model):
         return self.from_user.username+":"+self.comment
 
 class Job(models.Model):
-    content = models.CharField(max_length=200, blank=False)
+    title = models.CharField(max_length=100, blank=False)
+    content = models.CharField(max_length=1000, blank=False)
     user = models.ForeignKey(User, related_name="who_write")
     date_created = models.DateTimeField(auto_now_add=True)
     locationState = models.CharField(max_length=200, blank=False, default = "USA")

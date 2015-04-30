@@ -22,7 +22,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Oddjobs</a>
+          <a class="navbar-brand" href="{%url 'home'%}">Oddjobs</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
@@ -31,9 +31,9 @@
 
           {% endblock %}
           </ul>
-          <form class="navbar-form navbar-left" role="search">
+          <form class="navbar-form navbar-left" role="search" action="{% url 'search'%}" method="get">
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Search">
+              <input type="text" class="form-control" placeholder="Search" name = "searchText">
             </div>
             <button type="submit" class="btn btn-default">Search</button>
 
@@ -48,35 +48,13 @@
       ================================================== -->
 
     <div class="container">
-
       <div class="page-header" id="banner">
         <div class="row">
         {% block mainPage%}
         {% endblock %}
-<!--           <div class="col-lg-8 col-md-7 col-sm-6">
-            <h1>Flatly</h1>
-            <p class="lead">Flat and modern</p>
-          </div>
-          <div class="col-lg-4 col-md-5 col-sm-6">
 
-          </div> -->
         </div>
       </div>
-
-
-<!--       <div class="bs-docs-section clearfix">
-        <div class="row">
-          <div class="col-lg-4">
-            
-
-          </div>
-          <div class="col-lg-8">
-          
-
-          </div>
-
-        </div>
-      </div> -->
 
 
       <footer>
