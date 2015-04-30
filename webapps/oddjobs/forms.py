@@ -1,4 +1,6 @@
 from django import forms
+from django.forms import ModelForm, Textarea
+
 from django.contrib.auth.forms import AuthenticationForm
 
 from django.contrib.auth.models import User
@@ -104,12 +106,36 @@ class RegistrationForm(forms.Form):
         return username
 
 class UserInfoForm(forms.ModelForm):
+    # firstname = forms.CharField(widget=forms.TextInput(
+    #                     attrs={'placeholder': 'Username',
+    #                         'class':"form-control", 
+    #                         'type':"text", 
+    #                         'id':"focusedInput"}))
 
     class Meta:
         model = UserInfo
-        exclude = {'user', 'blocks', 'follows'}
-        fields = {'firstname', 'lastname', 'location', 'cellphone', 'picture'}
-        widgets = {'picture' : forms.FileInput() }
+        exclude = ('user',)
+        fields = ('picture', 'firstname', 'lastname', 'location', 'cellphone')
+        # widgets = {'picture' : forms.FileInput() }
+        widgets = { 'picture' : forms.FileInput(),
+                    'firstname': forms.TextInput(attrs={
+                            'class':"form-control", 
+                            'type':"text"}),
+                    'lastname': forms.TextInput(attrs={
+                            'class':"form-control", 
+                            'type':"text", 
+                            'id':"focusedInput"}),
+                    'location': forms.TextInput(attrs={
+                            'class':"form-control", 
+                            'type':"text", 
+                            'id':"focusedInput"}),
+                    'cellphone': forms.TextInput(attrs={
+                            'class':"form-control", 
+                            'type':"text", 
+                            'id':"focusedInput"}),
+
+
+        }
 
 
 class CommentForm(forms.ModelForm):
@@ -129,7 +155,7 @@ class JobForm(forms.ModelForm):
 
     class Meta:
         model = Job
-        fields={'content','picture', 'locationState', 'category'}
+        fields=('content','picture', 'locationState', 'category')
         widgets = {
             'content': forms.Textarea(attrs={'class':"form-control", 
                                             'rows':"5",

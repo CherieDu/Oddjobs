@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 # Used to create and manually log in a user
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
+from mimetypes import guess_type
 
 
 from django.http import HttpResponse, Http404
@@ -35,6 +36,7 @@ def make_userinfo_view(request,
                 currentUser=[],
                 userinfo=[],
                 html="",
+                user = [],
                 userToShow=[],
                 jobs=[],
                 create_job_form=JobForm(),
@@ -47,6 +49,7 @@ def make_userinfo_view(request,
                 'username':currentUser,
                 'userinfo':userinfo,
                 'jobs':jobs,
+                'user' : user,
                 'userToShow':userToShow,
                 'create_job_form':create_job_form,
                 'create_userinfo_form':create_userinfo_form,
@@ -66,6 +69,7 @@ def home(request):
 
     html = 'login_home.html'
     currentUser = request.user
+    user = User.objects.get(username=request.user)
     userInfoToEdit = get_object_or_404(UserInfo, user=currentUser)
     userToShow = request.user
     userinfo_form = UserInfoForm(request.POST,request.FILES, instance=userInfoToEdit)
@@ -73,6 +77,7 @@ def home(request):
     return make_userinfo_view(request=request, 
         html=html, 
         jobs=jobs,
+        user = user,
         create_userinfo_form=userinfo_form,
         userToShow=userToShow,
         create_job_form=jobform,
@@ -224,6 +229,8 @@ def addJob(request):
 
     jobform.save()
     currentUser = request.user
+    user = User.objects.get(username=request.user),
+
     userInfoToEdit = get_object_or_404(UserInfo, user=currentUser)
     userToShow = request.user
     userinfo_form = UserInfoForm(request.POST,request.FILES, instance=userInfoToEdit)
@@ -231,6 +238,7 @@ def addJob(request):
     return make_userinfo_view(request=request, 
         html=html, 
         jobs=jobs,
+        user = user,
         create_userinfo_form=userinfo_form,
         userToShow=userToShow,
         create_job_form=jobform,
@@ -258,28 +266,59 @@ def showProfile(request, id):
     userToShow = User.objects.get(id=id)
     userinfo = get_object_or_404(UserInfo,user=userToShow)
     userInfoForm = UserInfoForm(request.POST, request.FILES, instance=userinfo)
-
+    user = User.objects.get(username=request.user)
     html = 'showProfile.html'
     return make_userinfo_view(request=request,
             currentUser=currentUser,
             userinfo=userinfo,
             html=html,
+            user = user,
             create_userinfo_form=userInfoForm,
             userToShow=userToShow)
+
+
 
 
 @login_required
 @transaction.atomic
 def editProfile(request):
+    print 'request', request
+    print 'request.user', request.user
+    user = User.objects.get(username=request.user)
+
+    if request.method == 'GET':
+        return showProfile(request, id = user.id)
+
     currentUser = request.user
     userinfo = get_object_or_404(UserInfo,user=currentUser)
-    html = 'editProfile.html'
+    html = 'showProfile.html'
     userInfoForm = UserInfoForm(request.POST, request.FILES, instance=userinfo)
 
-    return make_userinfo_view(request=request,
+    if not userInfoForm.is_valid():
+
+        return showProfile(request, id = user.id)
+    else:
+
+        userInfoForm.save()
+        currentUser = request.user
+
+        userinfo = get_object_or_404(UserInfo,user=currentUser)
+        return make_userinfo_view(request=request,
             currentUser=currentUser,
             userinfo=userinfo,
-            create_userinfo_form=userInfoForm,
-            html=html)
+            html=html,
+            user = user,
+            create_userinfo_form=userInfoForm)
 
+
+@login_required
+@transaction.atomic
+def getJobPhoto(request, id):
+    user=request.user
+    job = get_object_or_404(Job, id=id)
+    if not job.picture:
+        raise Http404
+
+    content_type = guess_type(job.picture.name)
+    return HttpResponse(job.picture, content_type=content_type)
 

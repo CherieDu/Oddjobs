@@ -7,8 +7,8 @@ class UserInfo(models.Model):
     user = models.OneToOneField(User, primary_key=True)
     picture = models.ImageField(upload_to="profile-avatar", default='profile-avatar/default_user.png')
 
-    firstname = models.CharField(max_length=42,default="", blank=True)
-    lastname = models.CharField(max_length=42,default="", blank=True)
+    firstname = models.CharField(max_length=42,default="Anonymous", blank=True)
+    lastname = models.CharField(max_length=42,default="Anonymous", blank=True)
     #username = models.CharField(max_length=50)
     #gender = models.CharField(max_length=200, null = True)
     location = models.CharField(max_length=42, default="", blank=True)

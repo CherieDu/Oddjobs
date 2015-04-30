@@ -13,6 +13,8 @@ urlpatterns = patterns('',
     url(r'^forgotPassword', 'oddjobs.views.forgotPassword',name='forgotPassword'),
     url(r'^reset_forgot_password/(?P<email>[a-zA-Z0-9_@\+\-.]+)/(?P<token>[a-z0-9\-]+)$', 'oddjobs.views.reset_forgot_password',name='resetForgotPassword'),
     url(r'^getProfilePhoto/(?P<id>\d+)$', 'oddjobs.views.getProfilePhoto', name='getProfilePhoto'),
+    url(r'^getJobPhoto/(?P<id>\d+)$', 'oddjobs.views.getJobPhoto', name='getJobPhoto'),
+
     url(r'^addJob$', 'oddjobs.views.addJob',name='addJob'),
     url(r'^askingHistory$', 'oddjobs.views.askingHistory',name='askingHistory'),
     url(r'^showProfile/(?P<id>\d+)$', 'oddjobs.views.showProfile',name='showProfile'),
